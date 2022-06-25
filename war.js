@@ -47,7 +47,6 @@ class Deck{
                 player2.hand.push(this.deck[i])
             }
         }
-        console.log(player1.hand, player2.hand)
     }
     
 }
