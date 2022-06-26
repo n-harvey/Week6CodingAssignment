@@ -89,9 +89,7 @@ class Game{
         while(player1.hand.length != 0 && player2.hand.length != 0){
             if(this.getCardValue(player1.hand[0].card) > this.getCardValue(player2.hand[0].card)){
                 console.log(`${player1.name} wins ${player1.hand[0].card} of ${player1.hand[0].suit} beats ${player2.hand[0].card} of ${player2.hand[0].suit}`)
-                let wonCard = player2.hand.shift()
-                player1.hand.push(wonCard)
-                player1.hand.push(player1.hand.shift())
+                player1.hand.push(player2.hand.shift(), player1.hand.shift())
                 if (warReward.length > 0){
                     player1.hand = player1.hand.concat(warReward)
                     warReward = []
@@ -105,9 +103,7 @@ class Game{
              }
              else{
                 console.log(`${player2.name} wins ${player2.hand[0].card} of ${player2.hand[0].suit} beats ${player1.hand[0].card} of ${player1.hand[0].suit}`)
-                let wonCard = player1.hand.shift()
-                player2.hand.push(wonCard)
-                player2.hand.push(player2.hand.shift())
+                player2.hand.push(player1.hand.shift(), player2.hand.shift())
                 if (warReward.length > 0){
                     player2.hand = player2.hand.concat(warReward)
                     warReward = []
