@@ -85,6 +85,8 @@ class Game{
         deck.shuffle()
         deck.deal(player1, player2)
         let warReward = []
+        let player1Score = 0
+        let player2Score = 0
 
         while(player1.hand.length != 0 && player2.hand.length != 0){
             if(this.getCardValue(player1.hand[0].card) > this.getCardValue(player2.hand[0].card)){
@@ -94,6 +96,7 @@ class Game{
                     player1.hand = player1.hand.concat(warReward)
                     warReward = []
                 }
+                player1Score++
             }
             else if(this.getCardValue(player1.hand[0].card) === this.getCardValue(player2.hand[0].card)){
                 console.log(`This is WAR ${player2.hand[0].card} of ${player2.hand[0].suit} is equal to ${player1.hand[0].card} of ${player1.hand[0].suit}`)
@@ -108,14 +111,15 @@ class Game{
                     player2.hand = player2.hand.concat(warReward)
                     warReward = []
                 }
+                player2Score++
             }
         }
 
         if(player1.hand.length == 0){
-            console.log(`${player2.name} wins!`)
+            console.log(`${player2.name} wins! with a total score of ${player1Score}`)
         }
         else{
-            console.log(`${player1.name} wins!`)
+            console.log(`${player1.name} wins! with a total score of ${player2Score}`)
         }
     }
 
