@@ -73,10 +73,7 @@ class Game{
                 cardValue = 11
             }
         }
-        else{
-            cardValue = parseInt(card)
-        }
-        return parseInt(cardValue)
+        return cardValue
     }
     
 
