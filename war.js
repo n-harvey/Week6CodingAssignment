@@ -91,7 +91,7 @@ class Game{
 
         while(player1.hand.length != 0 && player2.hand.length != 0){
             if(this.getCardValue(player1.hand[0].card) > this.getCardValue(player2.hand[0].card)){
-                console.log(`Player 1 wins ${player1.hand[0].card} of ${player1.hand[0].suit} beats ${player2.hand[0].card} of ${player2.hand[0].suit}`)
+                console.log(`${player1.name} wins ${player1.hand[0].card} of ${player1.hand[0].suit} beats ${player2.hand[0].card} of ${player2.hand[0].suit}`)
                 let wonCard = player2.hand.shift()
                 player1.hand.push(wonCard)
                 player1.hand.push(player1.hand.shift())
@@ -102,11 +102,12 @@ class Game{
             }
             else if(this.getCardValue(player1.hand[0].card) === this.getCardValue(player2.hand[0].card)){
                 console.log(`This is WAR ${player2.hand[0].card} of ${player2.hand[0].suit} is equal to ${player1.hand[0].card} of ${player1.hand[0].suit}`)
-                warReward.push(player2.hand.shift(), player1.hand.shift())
-                warReward.push(player2.hand.shift(), player1.hand.shift())
-            }
-            else{
-                console.log(`Player 2 wins ${player2.hand[0].card} of ${player2.hand[0].suit} beats ${player1.hand[0].card} of ${player1.hand[0].suit}`)
+                for (let i = 0; i < 2; i++) {
+                    warReward.push(player2.hand.shift(), player1.hand.shift())
+                }        
+             }
+             else{
+                console.log(`${player2.name} wins ${player2.hand[0].card} of ${player2.hand[0].suit} beats ${player1.hand[0].card} of ${player1.hand[0].suit}`)
                 let wonCard = player1.hand.shift()
                 player2.hand.push(wonCard)
                 player2.hand.push(player2.hand.shift())
