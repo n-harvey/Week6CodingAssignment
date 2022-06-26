@@ -78,8 +78,8 @@ class Game{
     
 
     startGame(){
-        let player1 = new Player(prompt('Enter name of player 1:'))
-        let player2 = new Player(prompt('Enter name of player 2:'))
+        let player1 = new Player('user')
+        let player2 = new Player('cpu')
         let deck = new Deck
         deck.createDeck()
         deck.shuffle()
@@ -116,11 +116,18 @@ class Game{
         }
 
         if(player1.hand.length == 0){
-            console.log(`${player2.name} wins! with a total score of ${player1Score}`)
+            console.log(`${player2.name} wins! 
+            Total score:
+            ${player2.name}: ${player2Score}
+            ${player1.name}: ${player1Score}`)
         }
         else{
-            console.log(`${player1.name} wins! with a total score of ${player2Score}`)
+            console.log(`${player1.name} wins! 
+            Total score:
+            ${player1.name}: ${player1Score}
+            ${player2.name}: ${player2Score}`)
         }
+        
     }
 
 
