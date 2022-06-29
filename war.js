@@ -137,9 +137,10 @@ class Game {
 		}
 	}
 
-	//startGame runs the entirely of the game
+	//startGame runs the entirety of the game
 	//Players and deck are created
 	//Deck is then filled with cards, shuffled, and dealt to player hands
+    //Game then runs using if else to compare values of cards and determine round winners
 
 	startGame() {
 		let player1 = new Player('User')
