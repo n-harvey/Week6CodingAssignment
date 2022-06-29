@@ -1,9 +1,17 @@
+//Player class, creates a player with a hand, name, and score. 
+//Default is user and CPU orginally used as new Player(prompt('Enter player name))
+
+
 class Player{
     constructor(name){
         this.name = name
         this.hand = []
+        this.score = 0
     }
 }
+
+//Card class
+//Takes params of suit and type of card
 
 class Card{
     constructor(suit, card){
@@ -12,10 +20,16 @@ class Card{
     }
 }
 
+//Deck class
+//Uses empty array to store cards
+
+
 class Deck{
     constructor(){
         this.deck = []
     }
+
+    //Nested For loop to fill empty array with all 52 cards
 
     createDeck(){
         let suit = ['Spades', 'Diamonds', 'Clubs', 'Hearts']
@@ -27,6 +41,9 @@ class Deck{
         }
     }
 
+    //Fisher–Yates shuffle
+    //Randomly rearranges the deck array as to simulate shuffling
+
     shuffle(){
         let index = this.deck.length, randomIndex;
 
@@ -37,6 +54,8 @@ class Deck{
             [this.deck[index], this.deck[randomIndex]] = [this.deck[randomIndex], this.deck[index]]
         }
     }
+
+    //Evenly divides the deck of cards between each player hand
 
     deal(player1, player2){
         for (let i = 0; i < this.deck.length; i++) {
@@ -51,10 +70,18 @@ class Deck{
     
 }
 
+//Game class
+//Constains the logic behind the game allowing the game to be played
+
 class Game{
     constructor(){
-
+        this.warReward = []
     }
+
+
+    //getCardValue function determines the value of the cards as we have numbers
+    //and letters assigned to cards, letter cards need number values
+    //returns the numerical value of the card to be used in comparisons 
 
     getCardValue(card){
         let cardValue = parseInt(card)
@@ -75,73 +102,91 @@ class Game{
         }
         return cardValue
     }
+    
+    //winRound is a function to handle card distrubituon for wins and losses and increment score
+
+    winRound(winner, loser){
+        winner.hand.push(loser.hand.shift(), winner.hand.shift())
+        if (this.warReward.length > 0){
+            winner.hand = winner.hand.concat(this.warReward)
+            this.warReward = []
+        }
+        winner.score++
+    }
+
+    outOfCards(loser, winner){
+        console.log(`${loser.name} does not have enough cards for war!`)
+        console.log(`${loser.name} cards remaining: ${loser.hand.length}`)
+        for (let i = 0; i < loser.hand.length; i++) {
+            winner.hand.push(loser.hand.shift())
+        }
+    }
+
+    //startGame runs the entirely of the game
+    //Players and deck are created
+    //Deck is then filled with cards, shuffled, and dealt to player hands
+
 
     startGame(){
-        let player1 = new Player('user')
-        let player2 = new Player('cpu')
+        let player1 = new Player('User')
+        let player2 = new Player('CPU')
         let deck = new Deck
         deck.createDeck()
         deck.shuffle()
         deck.deal(player1, player2)
-        let warReward = []
-        let player1Score = 0
-        let player2Score = 0
 
         while(player1.hand.length != 0 && player2.hand.length != 0){
             if(this.getCardValue(player1.hand[0].card) > this.getCardValue(player2.hand[0].card)){
                 console.log(`${player1.name} wins ${player1.hand[0].card} of ${player1.hand[0].suit} beats ${player2.hand[0].card} of ${player2.hand[0].suit}`)
-                player1.hand.push(player2.hand.shift(), player1.hand.shift())
-                if (warReward.length > 0){
-                    player1.hand = player1.hand.concat(warReward)
-                    warReward = []
-                }
-                player1Score++
-
+                this.winRound(player1, player2)
             }
             else if(this.getCardValue(player1.hand[0].card) === this.getCardValue(player2.hand[0].card)){
                 console.log(`This is WAR ${player2.hand[0].card} of ${player2.hand[0].suit} is equal to ${player1.hand[0].card} of ${player1.hand[0].suit}`)
+
+                //Make sure players have enough cards for war, if there is less than 3 cards a player does not have enough cards to complete the war
+                //Traditional rules state if there is not enough cards for the war that player loses
+                //Shifts the remaining cards to the winners hand
+
                 if(player1.hand.length >= 3 && player2.hand.length >= 3){
                     for (let i = 0; i < 2; i++) {
-                        warReward.push(player2.hand.shift(), player1.hand.shift())
+                        this.warReward.push(player2.hand.shift(), player1.hand.shift())
                     }
                 }
                 else if(player1.hand.length < 3){
-                    console.log(`${player1.name} does not have enough cards for war!`)
-                    break
+                    this.outOfCards(player1, player2)
                 }
                 else{
-                    console.log(`${player2.name} does not have enough cards for war!`)
-                    break
+                    this.outOfCards(player2, player1)
                 }
              }
              else{
                 console.log(`${player2.name} wins ${player2.hand[0].card} of ${player2.hand[0].suit} beats ${player1.hand[0].card} of ${player1.hand[0].suit}`)
-                player2.hand.push(player1.hand.shift(), player2.hand.shift())
-                if (warReward.length > 0){
-                    player2.hand = player2.hand.concat(warReward)
-                    warReward = []
-                }
-                player2Score++
+                this.winRound(player2, player1)
             }
         }
+
+        //Score output based on who is out of cards
 
         if(player1.hand.length === 0){
             console.log(`${player2.name} wins! 
             Total score:
-            ${player2.name}: ${player2Score}
-            ${player1.name}: ${player1Score}`)
+            ${player2.name}: ${player2.score}
+            ${player1.name}: ${player1.score}`)
         }
-        else{
+        else if(player2.hand.length === 0){
             console.log(`${player1.name} wins! 
             Total score:
-            ${player1.name}: ${player1Score}
-            ${player2.name}: ${player2Score}`)
+            ${player1.name}: ${player1.score}
+            ${player2.name}: ${player2.score}`)
         }
         
     }
 
 
 }
+
+
+// Runs the game
 
 let game = new Game
 game.startGame()
