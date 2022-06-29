@@ -1,6 +1,17 @@
-//Player class, creates a player with a hand, name, and score. 
-//Default is user and CPU orginally used as new Player(prompt('Enter player name))
+/*
+WAR
+Rules
+2 players with 26 cards each
+Each round a player plays a card, highest card value win with Ace being the highest
+In the event of a tie (war) each player plays a 2nd card 'facedown' and a 3rd card to resolve the tie, highest card wins
+In the event the 3rd card ties again, another round of war is played
+If a player does not have enough cards to complete the war that player loses
+First player to run out of cards loses
+*/
 
+
+//Player class, creates a player with a hand, name, and score. 
+//Default is user and CPU 
 
 class Player{
     constructor(name){
@@ -67,7 +78,6 @@ class Deck{
             }
         }
     }
-    
 }
 
 //Game class
@@ -77,7 +87,6 @@ class Game{
     constructor(){
         this.warReward = []
     }
-
 
     //getCardValue function determines the value of the cards as we have numbers
     //and letters assigned to cards, letter cards need number values
@@ -114,10 +123,13 @@ class Game{
         winner.score++
     }
 
+    //outOfCards function called when there is not enough cards in a hand for WAR (minimum 3 cards, current card, facedown card, final card)
+    //moves remaining cards from losers hand to winners hand so winner ends up with all 52 cards in hand
+
     outOfCards(loser, winner){
         console.log(`${loser.name} does not have enough cards for war!`)
         console.log(`${loser.name} cards remaining: ${loser.hand.length}`)
-        for (let i = 0; i < loser.hand.length; i++) {
+        for (let i = 0; i <= loser.hand.length; i++) {
             winner.hand.push(loser.hand.shift())
         }
     }
@@ -125,7 +137,6 @@ class Game{
     //startGame runs the entirely of the game
     //Players and deck are created
     //Deck is then filled with cards, shuffled, and dealt to player hands
-
 
     startGame(){
         let player1 = new Player('User')
@@ -144,8 +155,7 @@ class Game{
                 console.log(`This is WAR ${player2.hand[0].card} of ${player2.hand[0].suit} is equal to ${player1.hand[0].card} of ${player1.hand[0].suit}`)
 
                 //Make sure players have enough cards for war, if there is less than 3 cards a player does not have enough cards to complete the war
-                //Traditional rules state if there is not enough cards for the war that player loses
-                //Shifts the remaining cards to the winners hand
+                //If not enough cards call outOfCards function
 
                 if(player1.hand.length >= 3 && player2.hand.length >= 3){
                     for (let i = 0; i < 2; i++) {
@@ -179,10 +189,7 @@ class Game{
             ${player1.name}: ${player1.score}
             ${player2.name}: ${player2.score}`)
         }
-        
     }
-
-
 }
 
 
