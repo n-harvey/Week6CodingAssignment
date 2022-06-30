@@ -57,15 +57,13 @@ class Deck {
 	//Randomly rearranges the deck array as to simulate shuffling
 
 	shuffle() {
-		let index = this.deck.length,
-			randomIndex;
+		let index = this.deck.length, randomIndex
 
 		while (index != 0) {
 			randomIndex = Math.floor(Math.random() * index)
 			index--
 
-			[this.deck[index], this.deck[randomIndex]] = [this.deck[
-				randomIndex], this.deck[index]]
+			[this.deck[index], this.deck[randomIndex]] = [this.deck[randomIndex], this.deck[index]]
 		}
 	}
 
