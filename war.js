@@ -152,26 +152,19 @@ class Game {
 		deck.deal(player1, player2)
 
 		while (player1.hand.length != 0 && player2.hand.length != 0) {
-			if (this.getCardValue(player1.hand[0].card) > this.getCardValue(
-					player2.hand[0].card)) {
-				console.log(
-					`${player1.name} wins ${player1.hand[0].card} of ${player1.hand[0].suit} beats ${player2.hand[0].card} of ${player2.hand[0].suit}`
-				)
+			if (this.getCardValue(player1.hand[0].card) > this.getCardValue(player2.hand[0].card)) {
+				console.log(`${player1.name} wins ${player1.hand[0].card} of ${player1.hand[0].suit} beats ${player2.hand[0].card} of ${player2.hand[0].suit}`)
 				this.winRound(player1, player2)
 			}
-			else if (this.getCardValue(player1.hand[0].card) === this
-				.getCardValue(player2.hand[0].card)) {
-				console.log(
-					`This is WAR ${player2.hand[0].card} of ${player2.hand[0].suit} is equal to ${player1.hand[0].card} of ${player1.hand[0].suit}`
-				)
+			else if (this.getCardValue(player1.hand[0].card) === this.getCardValue(player2.hand[0].card)) {
+				console.log(`This is WAR ${player2.hand[0].card} of ${player2.hand[0].suit} is equal to ${player1.hand[0].card} of ${player1.hand[0].suit}`)
 
 				//Make sure players have enough cards for war, if there is less than 3 cards a player does not have enough cards to complete the war
 				//If not enough cards call outOfCards function
 
 				if (player1.hand.length >= 3 && player2.hand.length >= 3) {
 					for (let i = 0; i < 2; i++) {
-						this.warReward.push(player2.hand.shift(), player1
-							.hand.shift())
+						this.warReward.push(player2.hand.shift(), player1.hand.shift())
 					}
 				}
 				else if (player1.hand.length < 3) {
@@ -182,9 +175,7 @@ class Game {
 				}
 			}
 			else {
-				console.log(
-					`${player2.name} wins ${player2.hand[0].card} of ${player2.hand[0].suit} beats ${player1.hand[0].card} of ${player1.hand[0].suit}`
-				)
+				console.log(`${player2.name} wins ${player2.hand[0].card} of ${player2.hand[0].suit} beats ${player1.hand[0].card} of ${player1.hand[0].suit}`)
 				this.winRound(player2, player1)
 			}
 		}
