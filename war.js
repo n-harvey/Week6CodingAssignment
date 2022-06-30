@@ -10,7 +10,7 @@ First player to run out of cards loses
 */
 
 
-//Player class, creates a player with a hand, name, and score. 
+//Player class takes param of name, creates a player with a hand, name, and score. 
 //Default is user and CPU 
 class Player {
 	constructor(name) {
@@ -85,6 +85,7 @@ class Deck {
 
 //Game class
 //Constains the logic behind the game allowing the game to be played
+//warReward variable used to store cards that are up for grabs during war
 
 class Game {
 	constructor() {
