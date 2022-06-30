@@ -88,6 +88,8 @@ class Deck {
 class Game {
 	constructor() {
 		this.warReward = []
+        this.warCount = 0
+        this.totalRounds = 0
 	}
 
 	//getCardValue function determines the value of the cards as we have numbers
@@ -136,7 +138,6 @@ class Game {
 		}
         if(this.warReward.length > 0){
             winner.hand.push(this.warReward)
-            this.warReward = []
         }
 	}
 
@@ -160,6 +161,7 @@ class Game {
 			}
 			else if (this.getCardValue(player1.hand[0].card) === this.getCardValue(player2.hand[0].card)) {
 				console.log(`This is WAR ${player2.hand[0].card} of ${player2.hand[0].suit} is equal to ${player1.hand[0].card} of ${player1.hand[0].suit}`)
+                this.warCount++
 
 				//Make sure players have enough cards for war, if there is less than 3 cards a player does not have enough cards to complete the war
 				//If not enough cards call outOfCards function
@@ -180,6 +182,7 @@ class Game {
 				console.log(`${player2.name} wins ${player2.hand[0].card} of ${player2.hand[0].suit} beats ${player1.hand[0].card} of ${player1.hand[0].suit}`)
 				this.winRound(player2, player1)
 			}
+            this.totalRounds++
 		}
 
 		//Score output based on who is out of cards
@@ -196,6 +199,10 @@ class Game {
             ${player1.name}: ${player1.score}
             ${player2.name}: ${player2.score}`)
 		}
+
+        console.log(`Total wars: ${this.warCount}`)
+        console.log(`Total rounds: ${this.totalRounds}`)
+        console.log('War percent: ' + ((this.warCount/this.totalRounds)*100).toFixed(2) + '%')
 
         console.log(player1.hand, player2.hand)
 	}
