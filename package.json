@@ -1,0 +1,23 @@
+{
+  "name": "week-6-coding-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "war.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n-harvey/Week6CodingAssignment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n-harvey/Week6CodingAssignment/issues"
+  },
+  "homepage": "https://github.com/n-harvey/Week6CodingAssignment#readme",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  }
+}
