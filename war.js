@@ -134,6 +134,10 @@ class Game {
 		for (let i = 0; i <= loser.hand.length; i++) {
 			winner.hand.push(loser.hand.shift())
 		}
+        if(this.warReward.length > 0){
+            winner.hand.push(this.warReward)
+            this.warReward = []
+        }
 	}
 
 	//startGame runs the entirety of the game
@@ -192,6 +196,8 @@ class Game {
             ${player1.name}: ${player1.score}
             ${player2.name}: ${player2.score}`)
 		}
+
+        console.log(player1.hand, player2.hand)
 	}
 }
 
