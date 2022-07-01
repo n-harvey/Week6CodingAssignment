@@ -202,7 +202,6 @@ class Game {
 
         console.log(`Total wars: ${this.warCount}`)
         console.log(`Total rounds: ${this.totalRounds}`)
-        console.log('War percent: ' + ((this.warCount/this.totalRounds)*100).toFixed(2) + '%')
 
         console.log(player1.hand, player2.hand)
 	}
