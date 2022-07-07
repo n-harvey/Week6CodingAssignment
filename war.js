@@ -46,11 +46,12 @@ class Deck {
 		let card = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J',
 			'Q', 'K'
 		]
-		for (let i = 0; i < suit.length; i++) {
-			for (let x = 0; x < card.length; x++) {
-				this.deck.push(new Card(suit[i], card[x]))
-			}
-		}
+
+		suit.forEach((suit) => {
+			card.forEach((card) => {
+				this.deck.push({suit, card})
+			})
+		})
 	}
 
 	//Fisher–Yates shuffle
@@ -96,7 +97,7 @@ class Game {
 	//and letters assigned to cards, letter cards need number values
 	//returns the numerical value of the card to be used in comparisons 
 
-	getCardValue(card) {
+	getCardValue = (card) => {
 		let cardValue = parseInt(card)
 		if (isNaN(cardValue)) {
 			switch (card) {
@@ -118,7 +119,7 @@ class Game {
 
 	//winRound is a function to handle card distrubituon for wins and losses and increment score
 
-	winRound(winner, loser) {
+	winRound = (winner, loser) => {
 		winner.hand.push(loser.hand.shift(), winner.hand.shift())
 		if (this.warReward.length > 0) {
 			winner.hand = winner.hand.concat(this.warReward)
@@ -130,7 +131,7 @@ class Game {
 	//outOfCards function called when there is not enough cards in a hand for WAR (minimum 3 cards, current card, facedown card, final card)
 	//moves remaining cards from losers hand to winners hand so winner ends up with all 52 cards in hand
 
-	outOfCards(loser, winner) {
+	outOfCards = (loser, winner) => {
 		console.log(`${loser.name} does not have enough cards for war!`)
 		console.log(`${loser.name} cards remaining: ${loser.hand.length}`)
 		for (let i = 0; i <= loser.hand.length; i++) {
