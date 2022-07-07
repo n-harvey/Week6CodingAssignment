@@ -49,7 +49,7 @@ class Deck {
 
 		suit.forEach((suit) => {
 			card.forEach((card) => {
-				this.deck.push({suit, card})
+				this.deck.push(new Card(suit, card))
 			})
 		})
 	}
